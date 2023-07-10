@@ -1,19 +1,43 @@
-// define variables
+// initializing...
+// resources
 let kupo = 0;
 let wood = 0;
 let metal = 0;
 let crystal = 0;
 
+// units
+let gardeners = 0;
+let trees = 0;
+let conjures = 0;
+
+
 // counters
-let kupoPerSecond = 0;
+let kupoPerSecond = gardeners + trees;
 let woodPerSecond = 0;
 let metalPerSecond = 0;
 let crystalPerSecond = 0;
+
+let updateValue = (a, b) => {
+    document.getElementById(a).textContent = b
+}
 
 $(document).ready(function () {
     // Buttons    
     $('#kupoButton').on('click', function() {
         kupo += 1
+    })
+    $('#gardenerButton').on('click', function() {
+        if (kupo >= prices.gardener) {
+            kupo -= prices.gardener;
+            kupoPerSecond += 1;
+            if (kupoPerSecond < 20) {
+                prices.gardener += 3;
+            } else {
+                prices.gardener *= 1.1
+            }
+            updateValue('gardenerCost', prices.gardener);
+            updateValue('kps', kupoPerSecond);
+        }
     })
     $('#woodButton').on('click', function() {
         if (kupo >= prices.wood) {
@@ -21,8 +45,8 @@ $(document).ready(function () {
             woodPerSecond += 1;
             kupo -= prices.wood;
             prices.wood = Math.round(prices.wood * 1.05)
-            document.getElementById('woodCost').textContent = prices.wood
-            document.getElementById('wps').textContent = woodPerSecond
+            updateValue('woodCost', prices.wood);
+            updateValue('wps', woodPerSecond);
         }
     })
     $('#metalButton').on('click', function() {
@@ -33,7 +57,7 @@ $(document).ready(function () {
             wood -= prices.metal[1];
             prices.metal[0] = Math.round(prices.metal[0] * 1.3)
             prices.metal[1] = Math.round(prices.metal[1] * 1.1)
-            document.getElementById('mps').textContent = metalPerSecond
+            updateValue('mps', metalPerSecond)
         }
     })
     $('#crystalButton').on('click', function() {
@@ -42,7 +66,7 @@ $(document).ready(function () {
             kupo -= prices.crystal[0];
             wood -=prices.crystal[1];
             metal -= prices.crystal[2];
-            document.getElementById('cps').textContent = crystalPerSecond;
+            updateValue('cps', crystalPerSecond);
         }
     })
     $('#treeButton').on('click', function() {
@@ -52,9 +76,9 @@ $(document).ready(function () {
             kupoPerSecond += 20;
             prices.tree[0] = Math.round(prices.tree[0] * 1.5)
             prices.tree[1] = Math.round(prices.tree[1] * 1.75)
-            document.getElementById('treeCostKupo').textContent = prices.tree[0];
-            document.getElementById('treeCostWood').textContent = prices.tree[1];
-            document.getElementById('kps').textContent = kupoPerSecond
+            updateValue('treeCostKupo', prices.tree[0]);
+            updateValue('treeCostWood', prices.tree[1]);
+            updateValue('kps', kupoPerSecond)
 
         }
     })
@@ -63,32 +87,32 @@ $(document).ready(function () {
           kupo -= prices.conjure[0];
           crystal -= prices.conjure[3];
           kupoPerSecond += 500;
-          document.getElementById('kps').textContent = kupoPerSecond;
+          updateValue('kps', kupoPerSecond);
         }
     })
     $('.row').children().css("display", "inline")
 
     // Initialize Prices
-    document.getElementById('woodCost').textContent = prices.wood;
-    document.getElementById('metalCostKupo').textContent = prices.metal[0];
-    document.getElementById('metalCostWood').textContent = prices.metal[1];
-    document.getElementById('crystalCostKupo').textContent = prices.crystal[0];
-    document.getElementById('crystalCostWood').textContent = prices.crystal[1];
-    document.getElementById('crystalCostMetal').textContent = prices.crystal[2];
-    document.getElementById('treeCostKupo').textContent = prices.tree[0];
-    document.getElementById('treeCostWood').textContent = prices.tree[1];
-    document.getElementById('conjureCostKupo').textContent = prices.conjure[0]
-    document.getElementById('conjureCostCrystal').textContent = prices.conjure[3];
-    document.getElementById('primalCostKupo').textContent = prices.nutPrimal[0];
-    document.getElementById('primalCostWood').textContent = prices.nutPrimal[1];
-    document.getElementById('primalCostMetal').textContent = prices.nutPrimal[2];
-    document.getElementById('primalCostCrystal').textContent = prices.nutPrimal[3];
+    updateValue('woodCost', prices.wood);
+    updateValue('metalCostKupo', prices.metal[0]);
+    updateValue('metalCostWood', prices.metal[1]);
+    updateValue('crystalCostKupo', prices.crystal[0]);
+    updateValue('crystalCostWood', prices.crystal[1]);
+    updateValue('crystalCostMetal', prices.crystal[2]);
+    updateValue('treeCostKupo', prices.tree[0]);
+    updateValue('treeCostWood', prices.tree[1]);
+    updateValue('conjureCostKupo', prices.conjure[0])
+    updateValue('conjureCostCrystal', prices.conjure[3]);
+    updateValue('primalCostKupo', prices.nutPrimal[0]);
+    updateValue('primalCostWood', prices.nutPrimal[1]);
+    updateValue('primalCostMetal', prices.nutPrimal[2]);
+    updateValue('primalCostCrystal', prices.nutPrimal[3]);
 
     // Initialize counters
-    document.getElementById('kps').textContent = kupoPerSecond
-    document.getElementById('wps').textContent = woodPerSecond
-    document.getElementById('mps').textContent = metalPerSecond
-    document.getElementById('cps').textContent = crystalPerSecond
+    updateValue('kps', kupoPerSecond)
+    updateValue('wps', woodPerSecond)
+    updateValue('mps', metalPerSecond)
+    updateValue('cps', crystalPerSecond)
 
     // Set these to hide() once you're done.
     $('.boughtWood').show();
@@ -97,6 +121,7 @@ $(document).ready(function () {
 });
 
 let prices = {
+    gardener: 5,
     wood: 10,
     metal: [200, 10],
     crystal: [10000, 300, 20],
@@ -110,10 +135,10 @@ function update() {
     wood += woodPerSecond/30;
     metal += metalPerSecond/30;
     crystal += crystalPerSecond/30;
-    document.getElementById('kupoCounter').textContent = Math.round(kupo);
-    document.getElementById('woodCounter').textContent = Math.round(wood);
-    document.getElementById('metalCounter').textContent = Math.round(metal);
-    document.getElementById('crystalCounter').textContent = Math.round(crystal);
+    updateValue('kupoCounter', Math.round(kupo));
+    updateValue('woodCounter', Math.round(wood));
+    updateValue('metalCounter', Math.round(metal));
+    updateValue('crystalCounter', Math.round(crystal));
 }
 
 setInterval(update, 33);

@@ -7,33 +7,21 @@
     <div class="game">
     <h1>Moogles' Forest rewrite</h1>
     <h5>"this time it's purrsonal" edition</h5>
-    <div class="row">
-        <p>Kupo nuts: <span id="kupoCounter"></span> (+<span id="kps"></span>/s)</p>
-        <button id="kupoButton">Pick Kupo Nut</button>
-    </div>
-    <div class="row">
-        <p class="boughtWood">Wood: <span id="woodCounter"></span> (+<span id="wps"></span>/s)</p>
-        <button id="woodButton">Hire Woodcutter<br>Cost: <span id="woodCost"></span> Kupo</button>
-    </div>
-    <div class="row">
-        <p class="boughtMetal">Metal: <span id="metalCounter" class="boughtMetal"></span> (+<span id="mps"></span>/s)</p>
-        <button class="boughtWood" id="metalButton">Hire Metalworker<br>Cost: <span id="metalCostKupo"></span> Kupo, <span id="metalCostWood"></span> Wood</button>
-        <p class="boughtWood"></p>
-    </div>
-    <div class="row">
-        <p class="boughtCrystal">Crystals: <span id="crystalCounter" class="boughtCrystal"></span> (+<span id="cps"></span>/s)</p>
-        <button class="boughtMetal" id="crystalButton">Hire Miner<br>Cost: <span id="crystalCostKupo"></span> Kupo, <span id="crystalCostWood"></span> Wood, <span id="crystalCostMetal"></span> Metal</button>
-    </div>
-    <div class="row">
-        <button id="treeButton">Plant Kupo Tree (+50 kupo/s)<br>Cost: <span id="treeCostKupo"></span> Kupo, <span id="treeCostWood"></span> Wood</button>
-        <p></p>
-    </div>
-    <div class="row">
-        <button id="conjureButton">Conjure Kupo Nuts from thin air! (+500 kupo /s)<br>Cost: <span id="conjureCostKupo"></span> Kupo, <span id="conjureCostCrystal"></span> Crystals</button>
-    </div>
-    <div class="row">
-        <button id="primalButton" class="boughtCrystal">Summon a Kupo Nut as an Eikon. What could go wrong?<br>Cost: <span id="primalCostKupo"></span> Kupo, <span id="primalCostWood"></span> Wood, <span id="primalCostMetal"></span> Metal, <span id="primalCostCrystal"></span> Crystals</button>
-    </div>
+    <img style="position: absolute; margin-left: 18em;" id="kupoButton" src="kuponut.png">
+    <!-- counters -->
+    <p>Kupo nuts: <span id="kupoCounter"></span> (+<span id="kps"></span>/s)</p>
+    <p class="boughtWood">Wood: <span id="woodCounter"></span> (+<span id="wps"></span>/s)</p>
+    <p class="boughtMetal">Metal: <span id="metalCounter" class="boughtMetal"></span> (+<span id="mps"></span>/s)</p>
+    <p class="boughtCrystal">Crystals: <span id="crystalCounter" class="boughtCrystal"></span> (+<span id="cps"></span>/s)</p>    
+    <!-- buttons -->
+    <button id="gardenerButton">[ Hire Gardener ]<br><span id="gardenerCost"></span> Kupo</button>
+    <button id="woodButton">[ Hire Woodcutter ]<br><span id="woodCost"></span> Kupo</button>
+    <button class="boughtWood" id="metalButton">[ Hire Metalworker ]<br><span id="metalCostKupo"></span> Kupo, <span id="metalCostWood"></span> Wood</button>
+    <button class="boughtMetal" id="crystalButton">[ Hire Miner ]<br><span id="crystalCostKupo"></span> Kupo, <span id="crystalCostWood"></span> Wood, <span id="crystalCostMetal"></span> Metal</button>
+    <button id="treeButton">[ Plant Kupo Tree (+50 kupo /s) ]<br><span id="treeCostKupo"></span> Kupo, <span id="treeCostWood"></span> Wood</button>
+    <button id="conjureButton">[ Conjure Kupo Nuts from thin air! (+500 kupo /s) ]<br><span id="conjureCostKupo"></span> Kupo, <span id="conjureCostCrystal"></span> Crystals</button>
+    <button id="primalButton" class="boughtCrystal">[ Summon a Kupo Nut as an Eikon. What could go wrong? ]<br><span id="primalCostKupo"></span> Kupo, <span id="primalCostWood"></span> Wood, <span id="primalCostMetal"></span> Metal, <span id="primalCostCrystal"></span> Crystals</button>
+
 </div>
 </body>
 
